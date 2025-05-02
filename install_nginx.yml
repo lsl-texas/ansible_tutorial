@@ -7,14 +7,42 @@
   - name: update repository index
     apt:
       update_cache: yes
+    when: ansible_distribution in ["Ubuntu", "Debian"]
 
   - name: install the nginx package
     apt:
       name: nginx
       state: latest
+    when: ansible_distribution in ["Ubuntu", "Debian"]
 
   - name: add htop
     apt:
       name: htop
       state: latest
+    when: ansible_distribution in ["Ubuntu", "Debian"]
+
+
+  - name: update repository index
+    dnf:
+      update_cache: yes
+    when: ansible_distribution == "CentOS"
+
+  - name: install the nginx package
+    dnf:
+      name: nginx
+      state: latest
+    when: ansible_distribution == "CentOS"
+
+  - name: install the epel package
+    dnf:
+      name: epel-release
+      state: latest
+    when: ansible_distribution == "CentOS"
+
+  - name: add sysbench
+    dnf:
+      name: sysbench
+      state: latest
+    when: ansible_distribution == "CentOS"
+
 
