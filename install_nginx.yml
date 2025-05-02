@@ -1,0 +1,20 @@
+---
+
+- hosts: all
+  become: true
+  tasks:
+
+  - name: update repository index
+    apt:
+      update_cache: yes
+
+  - name: install the nginx package
+    apt:
+      name: nginx
+      state: latest
+
+  - name: add htop
+    apt:
+      name: htop
+      state: latest
+
